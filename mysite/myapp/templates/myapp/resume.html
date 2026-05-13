@@ -22,18 +22,6 @@
 				}
 			}
 		</style>
-		<script>
-			function downloadResume() {
-				const html = '<!doctype html>\n' + document.documentElement.outerHTML;
-				const blob = new Blob([html], { type: 'text/html' });
-				const url = URL.createObjectURL(blob);
-				const link = document.createElement('a');
-				link.href = url;
-				link.download = '{{ user_profile.name|escapejs }}-resume.html';
-				link.click();
-				URL.revokeObjectURL(url);
-			}
-		</script>
 	</head>
 	<body class="min-h-screen bg-slate-100 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
 		<main class="mx-auto max-w-5xl rounded-3xl border border-slate-200 bg-white shadow-lg">
@@ -48,9 +36,9 @@
 						<button type="button" onclick="window.print()" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
 							Print CV
 						</button>
-						<button type="button" onclick="downloadResume()" class="inline-flex items-center justify-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800">
+						<a href="{% url 'download_resume' user_profile.id %}" class="inline-flex items-center justify-center rounded-full bg-slate-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800">
 							Download Resume
-						</button>
+						</a>
 						<a href="{% url 'dashboard' %}" class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50">
 							Back to Home
 						</a>
